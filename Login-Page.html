@@ -1,0 +1,81 @@
+<style>
+    .panel {
+        background-color:dodgerblue;
+        width: 300px;                                    /* Genişliği daralt         */                                     
+        padding: 20px;                                  /* İçeriden boşluk bırak    */
+        margin: 50px auto;                             /* Sayfanın ortasına hizala */
+        border-radius: 15px;                          /* Köşeleri yuvarlat        */
+        box-shadow: 0px 10px 30px rgba(0,0,0,0.5); /* Gölgelendirme ekle       */
+    }   
+ 
+    .panel input { 
+        width: 100%;                               /* Genişliği %100 yap */   
+        margin-bottom: 15px;                       /* Alt boşluk ekle */
+        padding: 10px;                             /* İçeriden boşluk ekle */
+        box-sizing: border-box;                    /* Kenarlık ve dolgu dahil genişlik ayarla */
+        border-radius: 5px;                        /* Kenarları hafif yuvarlat */
+        border: none;                              /* Kenarlık kaldır */
+    }
+    .panel button {
+        width: 100%;                           /* Genişliği %100 yap */   
+        padding: 10px;                         /* İçeriden boşluk ekle */
+        background-color: white;             /* Buton arka plan rengini beyaz yap */
+        border: none;                          /* Kenarlık kaldır */
+        cursor: pointer;                       /* Fare imlecini el yap */
+        border-radius: 5px;                    /* Kenarları hafif yuvarlat */
+        transition: 0.3s;                      /* Geçiş efekti ekle--Renk değişimini yumuşak yap */
+        font-weight: bold;                     /* Yazı kalınlığı */
+    }
+    .panel button:hover{
+        background-color: lightgrey;         /* Hover durumunda buton rengini değiştir */
+        color: black;                        /* Hover durumunda yazı rengini değiştir */
+    }
+    .panel h2 {
+        text-align: center;                    /* Başlığı ortala */
+        color: rgb(56, 88, 158);             /* Başlık rengini beyaz yap */
+        margin-bottom: 20px;                   /* Alt boşluk ekle */
+        font-family: sans-serif;
+    }
+</style>
+
+<div class="panel"> 
+    <h2>Giriş Yap</h2>
+    <div><input type="text" placeholder="Kullanıcı Adı" id="kullanici"></div>
+    <div><input type="password" placeholder="Şifre" id="parola"
+        onkeypress="if(event.key === 'Enter') girisYap()"></div>
+    <div style="text-align: left; font-size: 14px; color: white; margin-bottom: 10px;">
+        <input type="checkbox" onclick="sifreGoster()">Şifreyi Göster</div> 
+    <div style="text-align: right; margin-bottom: 15px;">
+        <a href="#" style="color: rgb(0, 110, 255); text-decoration: none; font-size: 14px;">Şifremi Unuttum</a></div>  
+    <div><button onclick="girisYap()">Giriş Yap</button></div>
+</div>
+
+<script>
+    function girisYap() {
+        var isim = document.getElementById("kullanici").value;
+        var sifre = document.getElementById("parola").value;
+
+        if (sifre.length < 6 ) {
+            alert("Güvenlik Uyarısı: Şifre en az 6 karakter olmalıdır.");
+        }
+        else if (isim == "admin" && sifre == "123456") {
+            window.location.href = "Home.html"; // Giriş başarılıysa Home.html'e yönlendir
+        }
+         else {
+            alert("Kullanıcı adı veya şifre yanlış.");
+        }
+    }
+    function sifreGoster() {
+        var sifreKutusu = document.getElementById("parola");
+        // Eğer şifre gizliyse -> göster (Text yap)
+        if (sifreKutusu.type == "password") {
+            sifreKutusu.type = "text";
+        } 
+        // Eğer şifre gösteriliyse -> gizle (Password yap)
+        else {
+            sifreKutusu.type = "password";
+        }
+        
+    }
+</script>
+
